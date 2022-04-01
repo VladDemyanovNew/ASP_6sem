@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <form name="data">
+        <label for="x">X:</label>
+        <input type="number" name="x" id="x" />
+        <label for="y">Y:</label>
+        <input type="number" name="y" id="y" />
+        <button type="button" onclick="onSend()">Отправить</button>
+    </form>
+    <script type="text/javascript">
+        function onSend() {
+            const formData = new FormData(document.forms.data);
+            let xhr = new XMLHttpRequest();
+
+            xhr.open('POST', '/task5');
+            xhr.send(formData);
+            xhr.onload = () => console.log(xhr.response);
+        }
+    </script>
+</body>
+</html>

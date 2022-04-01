@@ -1,0 +1,20 @@
+﻿@model Phonebook.WebMVC.ViewModels.NotFoundViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>NotFound</title>
+    <style type="text/css">
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="error">
+        <h1>Not found</h1>
+        <h2>@Model.RequestMethod: @Model.RequestURI не поддерживается</h2>
+    </div>
+</body>
+</html>
