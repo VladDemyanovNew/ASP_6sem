@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using System.Threading.Tasks;
 
-using Phonebook.DatabaseJSON.Entities;
-using Phonebook.DatabaseJSON.Repositories.Abstractions;
-using Phonebook.DatabaseJSON;
+using Phonebook.DatabaseSQL.Repositories.Abstractions;
+using Phonebook.DatabaseSQL.Entities;
 
 namespace Phonebook.WebMVC.Controllers
 {
@@ -36,37 +36,35 @@ namespace Phonebook.WebMVC.Controllers
         [HttpPost]
         public ActionResult AddSave(Phone phoneCreateData)
         {
-            this.phoneRepository.Create(phoneCreateData);
+            _ = this.phoneRepository.CreateAsync(phoneCreateData);
             return RedirectToAction("Index");
         }
 
         [HttpGet]
-        public ActionResult Update(int phoneId)
+        public async Task<ActionResult> Update(int phoneId)
         {
-            var phone = this.phoneRepository.Get(phoneId);
+            var phone = await this.phoneRepository.GetAsync(phoneId);
             return View(phone);
         }
 
         [HttpPost]
         public ActionResult UpdateSave(Phone phoneUpdateData)
         {
-            // TODO: Add a validation for the existence of a phone with id = phoneUpdateData.Id
-            this.phoneRepository.Update(phoneUpdateData.Id, phoneUpdateData);
+            _ = this.phoneRepository.UpdateAsync(phoneUpdateData);
             return RedirectToAction("Index");
         }
 
         [HttpGet]
-        public ActionResult Delete(int phoneId)
+        public async Task<ActionResult> Delete(int phoneId)
         {
-            var phone = this.phoneRepository.Get(phoneId);
+            var phone = await this.phoneRepository.GetAsync(phoneId);
             return View(phone);
         }
 
         [HttpPost]
-        public ActionResult DeleteSave(int phoneId)
+        public async Task<ActionResult> DeleteSave(int phoneId)
         {
-            // TODO: Add a validation for the existence of a phone with id = phoneId
-            this.phoneRepository.Delete(phoneId);
+            await this.phoneRepository.DeleteAsync(phoneId);
             return RedirectToAction("Index");
         }
     }

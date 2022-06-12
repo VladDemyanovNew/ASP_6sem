@@ -1,0 +1,69 @@
+﻿@model Lab8a.Database.Entities.Phone
+<style type="text/css">
+    .controls {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 8px;
+    }
+</style>
+
+<div class="user-info">
+    <input name="pristineName" type="text" value="@Model.Name" hidden>
+    <input name="pristinePhone" type="text" value="@Model.PhoneNumber" hidden>
+    <div class="form-input">
+        <input type="text"
+               name="Name"
+               value="@Model.Name"
+               form="update"
+               oninput="formValueChangeHandler()">
+        <span class="error-message name-require-error hidden">Поле обязательное</span>
+    </div>
+    <div class="form-input">
+        <input type="text"
+               name="PhoneNumber"
+               value="@Model.PhoneNumber"
+               form="update"
+               oninput="formValueChangeHandler()">
+        <span class="error-message phone-format-error hidden">Телефон не соответсвует формату</span>
+        <span class="error-message phone-require-error hidden">Поле обязательное</span>
+    </div>
+</div>
+
+<div class="controls">
+    <form id="update" action="/dist/updatesave" method="POST">
+        <input type="number" name="Id" value="@Model.Id" hidden>
+        <button type="submit" id="editBtn" disabled>Изменить</button>
+    </form>
+    <a class="button-style" href="/dist/">
+        Отказаться
+    </a>
+</div>
+
+<script type="text/javascript">
+    const deleteBtn = document.getElementById('deleteBtn');
+    const editBtn = document.getElementById('editBtn');
+    const pristineName = document.getElementsByName('pristineName')[0].value;
+    const pristinePhone = document.getElementsByName('pristinePhone')[0].value;
+    const phone_format_error = document.querySelector('.phone-format-error');
+    const phone_require_error = document.querySelector('.phone-require-error');
+    const name_require_error = document.querySelector('.name-require-error');
+
+    function formValueChangeHandler() {
+        const name = document.getElementsByName('Name')[0].value;
+        const phone = document.getElementsByName('PhoneNumber')[0].value;
+
+        displayErrorMessages(name, phone);
+
+        if (doesFormValid(name, phone)) {
+            editBtn.disabled = false;
+        } else {
+            editBtn.disabled = true;
+        }
+
+        if (name !== pristineName || phone !== pristinePhone) {
+            deleteBtn.disabled = true;
+        } else {
+            deleteBtn.disabled = false;
+        }
+    }
+</script>

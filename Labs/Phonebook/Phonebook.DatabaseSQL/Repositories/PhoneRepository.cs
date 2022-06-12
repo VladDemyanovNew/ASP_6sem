@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 
-using Phonebook.DatabaseSQL.Entites;
+using Phonebook.DatabaseSQL.Entities;
 using Phonebook.DatabaseSQL.Repositories.Abstractions;
 
 
@@ -17,29 +18,29 @@ namespace Phonebook.DatabaseSQL.Repositories
             this.dbContext = dbContext;
         }
 
-        public Task Create(Phone phoneCreateData)
+        public async Task<Phone> CreateAsync(Phone phone)
         {
-            throw new System.NotImplementedException();
+            _ = this.dbContext.Phones.Add(phone);
+            _ = await this.dbContext.SaveChangesAsync();
+            return phone;
         }
 
-        public Task Delete(int phoneId)
+        public async Task DeleteAsync(int phoneId)
         {
-            throw new System.NotImplementedException();
+            var phone = await this.GetAsync(phoneId);
+            _ = this.dbContext.Phones.Remove(phone);
+            _ = await this.dbContext.SaveChangesAsync();
         }
 
-        public Task<Phone> Get(int phoneId)
-        {
-            throw new System.NotImplementedException();
-        }
+        public async Task<Phone> GetAsync(int phoneId) =>
+            await this.dbContext.Phones.FindAsync(phoneId);
 
-        public IEnumerable<Phone> GetAll()
+        public IQueryable<Phone> GetAll() => this.dbContext.Phones;
+        
+        public async Task UpdateAsync(Phone phone)
         {
-            return this.dbContext.Set<Phone>().AsNoTracking();
-        }
-
-        public Task Update(int phoneId, Phone phoneUpdateData)
-        {
-            throw new System.NotImplementedException();
+            this.dbContext.Entry(phone).State = EntityState.Modified;
+            _ = await this.dbContext.SaveChangesAsync();
         }
     }
 }

@@ -1,0 +1,24 @@
+﻿@model IQueryable<Lab8a.Database.Entities.Phone>
+
+<style type="text/css">
+    .controls {
+        display: grid;
+    }
+</style>
+
+<div class="users">
+    <div class="users-row">
+        <div class="users-row-cell">Id</div>
+        <div class="users-row-cell">ФИО</div>
+        <div class="users-row-cell">Номер телефона</div>
+        <div class="users-row-cell">Действия</div>
+    </div>
+    @foreach (var phone in Model)
+    {
+        @Html.Partial("~/Views/Shared/Partials/PhonebookRow.cshtml", phone)
+    }
+</div>
+
+<div class="controls">
+    <a class="button-style" href="/dist/add">Добавить</a>
+</div>

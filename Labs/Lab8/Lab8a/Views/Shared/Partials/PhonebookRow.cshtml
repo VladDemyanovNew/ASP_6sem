@@ -1,0 +1,27 @@
+﻿@model Lab8a.Database.Entities.Phone
+
+<style type="text/css">
+    .delete-btn {
+        display: block;
+        cursor: pointer;
+    }
+</style>
+
+<div 
+    class="users-row"
+    onclick="window.location.href='/dist/update?phoneId=@Model.Id'"
+    style="cursor: pointer"
+>
+    <div class="users-row-cell">@Model.Id</div>
+    <div class="users-row-cell">@Model.Name</div>
+    <div class="users-row-cell">@Model.PhoneNumber</div>
+    <button onclick="deleteHandler(@Model.Id)" class="users-row-cell delete-btn">Удалить</button>
+</div>
+
+<script type="text/javascript">
+    function deleteHandler(phoneId) {
+        console.log(phoneId);
+        window.location.href = `/dist/delete?phoneId=${phoneId}`;
+        event.stopPropagation()
+    }
+</script>

@@ -1,0 +1,56 @@
+﻿<style type="text/css">
+    .controls {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 8px;
+    }
+</style>
+
+<div class="user-info">
+    <div class="form-input">
+        <input type="text"
+               name="Name"
+               form="add"
+               placeholder="ФИО"
+               oninput="formValueChangeHandler()">
+        <span class="error-message name-require-error hidden">Поле обязательное</span>
+    </div>
+    <div class="form-input">
+        <input type="text"
+               name="PhoneNumber"
+               form="add"
+               placeholder="Телефон"
+               oninput="formValueChangeHandler()">
+        <span class="error-message phone-format-error hidden">Телефон не соответсвует формату</span>
+        <span class="error-message phone-require-error hidden">Поле обязательное</span>
+    </div>
+</div>
+
+<div class="controls">
+    <form id="add" action="/dist/addsave" method="POST">
+        <button id="addBtn" disabled="true" type="submit">Добавить</button>
+    </form>
+    <a class="button-style" href="/">
+        Отказаться
+    </a>
+</div>
+
+<script type="text/javascript">
+    const addBtn = document.getElementById('addBtn');
+    const phone_format_error = document.querySelector('.phone-format-error');
+    const phone_require_error = document.querySelector('.phone-require-error');
+    const name_require_error = document.querySelector('.name-require-error');
+
+    function formValueChangeHandler() {
+        const phone = document.getElementsByName('PhoneNumber')[0].value;
+        const name = document.getElementsByName('Name')[0].value;
+
+        displayErrorMessages(name, phone);
+
+        if (doesFormValid(name, phone)) {
+            addBtn.disabled = false;
+        } else {
+            addBtn.disabled = true;
+        }
+    }
+</script>

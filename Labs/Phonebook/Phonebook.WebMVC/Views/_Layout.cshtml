@@ -7,9 +7,11 @@
 </head>
 <body>
     <div class="wrapper">
+        <header>@RenderSection("Header")</header>
         <div class="card">
             @RenderBody()
         </div>
+        <footer>@RenderSection("Footer")</footer>
     </div>
 </body>
 </html>

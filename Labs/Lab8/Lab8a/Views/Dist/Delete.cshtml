@@ -1,0 +1,31 @@
+﻿@model Lab8a.Database.Entities.Phone
+<style type="text/css">
+    .controls {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 8px;
+    }
+</style>
+
+<div class="user-info">
+    <div class="form-input">
+        <input type="text"
+               value="@Model.Name"
+               disabled>
+    </div>
+    <div class="form-input">
+        <input type="text"
+               value="@Model.PhoneNumber"
+               disabled>
+    </div>
+</div>
+
+<div class="controls">
+    <form action="/dist/deletesave" method="POST">
+        <input type="number" name="phoneId" value="@Model.Id" hidden>
+        <button type="submit">Удалить</button>
+    </form>
+    <a class="button-style" href="/dist/">
+        Отказаться
+    </a>
+</div>

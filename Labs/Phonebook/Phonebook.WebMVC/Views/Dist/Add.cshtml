@@ -1,4 +1,6 @@
-﻿<style type="text/css">
+﻿@using Phonebook.WebMVC.Helpers
+
+<style type="text/css">
     .controls {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -27,13 +29,19 @@
 </div>
 
 <div class="controls">
-    <form id="add" action="/dist/addsave" method="POST">
-        <button type="submit" id="addBtn" disabled>Добавить</button>
-    </form>
+    @Html.CreatePhoneForm()
     <a class="button-style" href="/dist/">
         Отказаться
     </a>
 </div>
+
+@section Footer {
+    Footer
+}
+
+@section Header {
+    Header
+}
 
 <script type="text/javascript">
     const addBtn = document.getElementById('addBtn');

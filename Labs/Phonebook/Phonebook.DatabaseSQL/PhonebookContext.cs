@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Phonebook.DatabaseSQL.Entites;
+using Phonebook.DatabaseSQL.Entities;
 
 namespace Phonebook.DatabaseSQL
 {

@@ -1,4 +1,4 @@
-﻿@model Phonebook.DatabaseJSON.Entities.Phone
+﻿@model Phonebook.DatabaseSQL.Entities.Phone
 <style type="text/css">
     .controls {
         display: grid;
@@ -38,6 +38,14 @@
         Отказаться
     </a>
 </div>
+
+@section Footer {
+    Footer
+}
+
+@section Header {
+    Header
+}
 
 <script type="text/javascript">
     const deleteBtn = document.getElementById('deleteBtn');

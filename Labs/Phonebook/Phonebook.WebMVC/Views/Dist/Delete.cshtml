@@ -1,4 +1,4 @@
-﻿@model Phonebook.DatabaseJSON.Entities.Phone
+﻿@model Phonebook.DatabaseSQL.Entities.Phone
 <style type="text/css">
     .controls {
         display: grid;
@@ -11,14 +11,12 @@
     <div class="form-input">
         <input type="text"
                value="@Model.Name"
-               disabled
-        >
+               disabled>
     </div>
     <div class="form-input">
         <input type="text"
                value="@Model.PhoneNumber"
-               disabled
-        >
+               disabled>
     </div>
 </div>
 
@@ -31,3 +29,11 @@
         Отказаться
     </a>
 </div>
+
+@section Footer {
+    Footer
+}
+
+@section Header {
+    Header
+}

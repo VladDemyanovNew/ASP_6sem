@@ -1,21 +1,22 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
-using Phonebook.DatabaseSQL.Entites;
+using Phonebook.DatabaseSQL.Entities;
 
 
 namespace Phonebook.DatabaseSQL.Repositories.Abstractions
 {
     public interface IPhoneRepository
     {
-        IEnumerable<Phone> GetAll();
+        IQueryable<Phone> GetAll();
 
-        Task<Phone> Get(int phoneId);
+        Task<Phone> GetAsync(int phoneId);
 
-        Task Create(Phone phoneCreateData);
+        Task<Phone> CreateAsync(Phone phone);
 
-        Task Update(int phoneId, Phone phoneUpdateData);
+        Task UpdateAsync(Phone phone);
 
-        Task Delete(int phoneId);
+        Task DeleteAsync(int phoneId);
     }
 }
